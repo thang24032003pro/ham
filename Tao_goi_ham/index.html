@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thực hành Hàm Confirm</title>
+</head>
+<body>
+
+    <script>
+        function processConfirm(answer) {
+            let result = "";
+            if (answer) {
+                result = "Excellent. We'll play a nice game of chess.";
+            } else {
+                result = "Maybe later then.";
+            }
+            return result;
+        }
+
+        let confirmAnswer = confirm("Shall we play a game?");
+        let message = processConfirm(confirmAnswer);
+        
+        alert(message);
+    </script>
+
+</body>
+</html>
