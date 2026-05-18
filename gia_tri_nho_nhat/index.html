@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm giá trị nhỏ nhất của mảng</title>
+</head>
+<body>
+
+    <h2>Kết quả tìm giá trị nhỏ nhất trong các mảng:</h2>
+    <div id="result"></div>
+
+    <script>
+        function findMinIndex(arr) {
+            if (arr.length === 0) {
+                return -1;
+            }
+
+            let minIndex = 0; 
+            
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] < arr[minIndex]) {
+                    minIndex = i; 
+                }
+            }
+            return minIndex; 
+        }
+
+        function displayResult(arrName, arr) {
+            let minIndex = findMinIndex(arr);
+            let output = "";
+
+            if (minIndex === -1) {
+                output = "<b>" + arrName + "</b>: [" + arr + "] <br> => Mảng rỗng (Kết quả trả về: -1)<br><br>";
+            } else {
+                output = "<b>" + arrName + "</b>: [" + arr + "] <br> => Giá trị nhỏ nhất là: <b>" + arr[minIndex] + "</b> (ở vị trí index: " + minIndex + ")<br><br>";
+            }
+
+            document.getElementById("result").innerHTML += output;
+        }
+
+        let arr1 = [3, 5, 1, 8, -3, 7, 8];
+        let arr2 = [7, 12, 6, 9, 20, 56, 89];
+        let arr3 = [];
+        let arr4 = [0, 0, 0, 0, 0, 0];
+
+        displayResult("arr1", arr1);
+        displayResult("arr2", arr2);
+        displayResult("arr3", arr3);
+        displayResult("arr4", arr4);
+    </script>
+</body>
+</html>
