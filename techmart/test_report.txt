@@ -1,0 +1,14 @@
+Trường hợp test 1: Giỏ hàng trống
+- Dữ liệu đầu vào: cart = [], customerType = "NORMAL"
+- Kết quả mong đợi: Tạm tính: 0 VNĐ, Giảm giá: 0 VNĐ, Thuế: 0 VNĐ, Tổng: 0 VNĐ.
+- Kết quả thực tế: Chạy thành công, hệ thống trả về 0 và không phát sinh lỗi vòng lặp.
+
+Trường hợp test 2: Giỏ mua nhiều mặt hàng
+- Dữ liệu đầu vào: cart = [{ item: "A", price: 100000, quantity: 2 }, { item: "B", price: 50000, quantity: 3 }], customerType = "MEMBER"
+- Kết quả mong đợi: Tạm tính: 350000 VNĐ, Giảm giá: 35000 VNĐ, Thuế (10% của 315000): 31500 VNĐ, Tổng: 346500 VNĐ.
+- Kết quả thực tế: Chạy chính xác theo công thức logic phân rã.
+
+Trường hợp test 3: Thay đổi thuế VAT thành 8%
+- Hành động: Thay đổi tham số mặc định của hàm calculateTax(amount, taxRate = 0.08)
+- Kết quả mong đợi: Khi chạy lại với giỏ hàng mẫu (VIP), tiền thuế VAT tự động cập nhật giảm từ 10% xuống 8% mà không làm sai lệch số tiền tạm tính hay tỷ lệ giảm giá 20% của VIP.
+- Kết quả thực tế: Đạt yêu cầu cô lập logic.
