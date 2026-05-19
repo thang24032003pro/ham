@@ -1,0 +1,13 @@
+=== BỘ DỮ LIỆU KIỂM THỬ KHẮC NGHIỆT (50 TẦNG THƯ MỤC) ===
+Cấu trúc kiểm thử tạo tự động có dạng cây lồng nhau tuyến tính với độ sâu 50 tầng.
+- Tầng 12 chứa file: "virus_hidden_12.exe"
+- Tầng 37 chứa file: "malware_37.exe"
+- Tầng 50 chứa file: "trojan_core_50.exe"
+
+KẾT QUẢ CHẠY HÀM TRÊN CONSOLE:
+Danh sách virus tìm được: [ 'virus_hidden_12.exe', 'malware_37.exe', 'trojan_core_50.exe' ]
+
+=== ĐÁNH GIÁ HIỆU NĂNG VÀ ĐỘ AN TOÀN ===
+1. Độ chính xác: Thuật toán quét xuyên qua toàn bộ 50 tầng thư mục lồng nhau, bóc tách chính xác các file độc hại ở mọi độ sâu bất kỳ mà hệ thống cũ bỏ sót.
+2. Bộ nhớ (Call Stack): Chương trình thực thi mượt mà, không gặp lỗi "RangeError: Maximum call stack size exceeded". 
+3. Giới hạn an toàn: Trong JavaScript, giới hạn Call Stack của các trình duyệt hiện đại (V8 Engine) dao động khoảng 10.000 ký tự gọi hàm. Việc xử lý 50 tầng cấu trúc thư mục tiêu tốn một lượng tài nguyên cực kỳ nhỏ và hoàn toàn nằm trong ngưỡng an toàn của hệ thống.
