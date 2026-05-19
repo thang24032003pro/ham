@@ -1,0 +1,38 @@
+=== KẾT QUẢ CHẠY THỬ NGHIỆM VỚI CÁC TRƯỜNG HỢP DỮ LIỆU ===
+
+--- CASE 1: ĐƠN HÀNG HỢP LỆ (VALID ORDER) ---
+Đầu vào:
+{
+    email: "khachhang@gmail.com",
+    items: [{ name: "Pizza", price: 150000, quantity: 2 }, { name: "Coca", price: 20000, quantity: 3 }]
+}
+Kết quả Console:
+--- Bắt đầu xử lý đơn hàng ---
+[DB] Đã lưu đơn hàng 412 vào CSDL.
+[EMAIL] Đang gửi biên lai tới khachhang@gmail.com...
+[EMAIL] Nội dung: Tổng tiền của bạn là 396000 VND.
+{ status: 'SUCCESS', orderId: 412, total: 396000 }
+
+--- CASE 2: ĐƠN HÀNG RỖNG (EMPTY CART) ---
+Đầu vào:
+{
+    email: "khachhang@gmail.com",
+    items: []
+}
+Kết quả Console:
+--- Bắt đầu xử lý đơn hàng ---
+{ status: 'FAILED', message: 'Đơn hàng rỗng!' }
+
+--- CASE 3: EMAIL KHÔNG HỢP LỆ (MISSING/INVALID EMAIL) ---
+Đầu vào:
+{
+    email: "khachhang_sai_dinh_dang.com",
+    items: [{ name: "Pizza", price: 150000, quantity: 2 }]
+}
+Kết quả Console:
+--- Bắt đầu xử lý đơn hàng ---
+{ status: 'FAILED', message: 'Email không hợp lệ!' }
+
+=== ĐÁNH GIÁ HỆ THỐNG ===
+1. Logic cũ được bảo toàn chính xác 100%, kết quả tính toán số tiền và quy trình dừng luồng khi xảy ra lỗi dữ liệu đầu vào hoạt động đúng như phiên bản cũ.
+2. Hàm điều phối không còn chứa logic rẽ nhánh phức tạp hay tính toán số học, đạt tiêu chuẩn cấu trúc tinh gọn.
