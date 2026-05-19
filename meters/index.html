@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển đổi Feet và Meters</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Bảng Chuyển Đổi Feet và Meters</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Feet</th>
+                <th>Meters</th>
+                <th>Meters</th>
+                <th>Feet</th>
+            </tr>
+        </thead>
+        <tbody id="conversion-table"></tbody>
+    </table>
+
+    <script>
+        function footToMeter(foot) {
+            return 0.305 * foot;
+        }
+
+        function meterToFoot(meter) {
+            return 3.279 * meter;
+        }
+
+        function generateTableData() {
+            let html = "";
+            let feetValues = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0];
+            let meterValues = [20.0, 25.0, 30.0, 35.0, 40.0, 45.0, 50.0, 55.0, 60.0, 65.0];
+
+            for (let i = 0; i < feetValues.length; i++) {
+                let f = feetValues[i];
+                let m = meterValues[i];
+                
+                let convertedMeter = footToMeter(f).toFixed(3);
+                let convertedFoot = meterToFoot(m).toFixed(3);
+
+                html += "<tr>" +
+                            "<td>" + f.toFixed(1) + "</td>" +
+                            "<td>" + convertedMeter + "</td>" +
+                            "<td>" + m.toFixed(1) + "</td>" +
+                            "<td>" + convertedFoot + "</td>" +
+                        "</tr>";
+            }
+            document.getElementById("conversion-table").innerHTML = html;
+        }
+
+        generateTableData();
+    </script>
+
+</body>
+</html>
