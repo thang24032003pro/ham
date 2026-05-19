@@ -1,0 +1,29 @@
+=== KẾT QUẢ LOG CONSOLE (GIỎ HÀNG TIÊU CHUẨN) ===
+1. Giỏ hàng gốc TRƯỚC khi xem trước: {"userId":"U123","totalPrice":1500,"items":["Laptop","Chuột không dây"],"metadata":{"isLocked":false}}
+2. Giỏ hàng xem trước (Hiển thị cho khách): {"userId":"U123","totalPrice":1300,"items":["Laptop","Chuột không dây","Bàn di chuột"],"metadata":{"isLocked":true}}
+3. Giỏ hàng gốc SAU khi xem trước (ĐÃ VÁ LỖI): {"userId":"U123","totalPrice":1500,"items":["Laptop","Chuột không dây"],"metadata":{"isLocked":false}}
+
+=> ĐÁNH GIÁ: Thành công. Dữ liệu tầng nông (totalPrice) và tầng sâu (items, metadata) của giỏ gốc không bị đột biến.
+
+=== KIỂM THỬ VỚI OBJECT SIÊU PHỨC TẠP (TEST CASE BỔ SUNG) ===
+Object đầu vào:
+let complexCartForTesting = {
+    userId: "U999",
+    totalPrice: 5000,
+    items: ["Hi-End PC", ["Mechanical Keyboard", "Keycap Set"]], 
+    metadata: {
+        isLocked: false,
+        couponHistory: {
+            activeCodes: ["WELCOME10", "SUMMER50"],
+            expiredDate: new Date("2026-12-31")
+        }
+    },
+    calculateTax: function() { return this.totalPrice * 0.1; } 
+};
+
+KẾT QUẢ SAU KHI CHẠY QUA HÀM DEEP COPY VÀ CHỈNH SỬA:
+- Mảng lồng mảng gốc complexCartForTesting.items[1] không bị thêm phần tử lạ.
+- Thuộc tính complexCartForTesting.metadata.couponHistory.expiredDate vẫn giữ nguyên kiểu dữ liệu [object Date].
+- Hàm complexCartForTesting.calculateTax() vẫn tồn tại và chạy chính xác, trả về: 500.
+
+=> ĐÁNH GIÁ: Hàm sao chép đạt độ bền vững tối đa, an toàn trước các cấu trúc dữ liệu phức tạp.
