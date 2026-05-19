@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm Số Nguyên Tố</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Tìm tất cả các số nguyên tố nhỏ hơn 10.000</h2>
+    <button onclick="displayPrimes()">Bắt đầu tìm</button>
+    <div id="result">Kết quả sẽ hiển thị tại đây...</div>
+
+    <script>
+        function isPrime(number) {
+            if (number <= 1) return false;
+            if (number <= 3) return true;
+            if (number % 2 === 0 || number % 3 === 0) return false;
+            
+            for (let i = 5; i * i <= number; i += 6) {
+                if (number % i === 0 || number % (i + 2) === 0) return false;
+            }
+            return true;
+        }
+
+        function findPrimesLessThan(limit) {
+            let primes = [];
+            for (let i = 2; i < limit; i++) {
+                if (isPrime(i)) {
+                    primes.push(i);
+                }
+            }
+            return primes;
+        }
+
+        function displayPrimes() {
+            let primeList = findPrimesLessThan(10000);
+            document.getElementById("result").innerHTML = 
+                "<strong>Tìm thấy " + primeList.length + " số nguyên tố:</strong><br><br>" + 
+                primeList.join(", ");
+        }
+    </script>
+
+</body>
+</html>
