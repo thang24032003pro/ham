@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài Tập Hàm JavaScript</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; font-size: 14px; }
+        body { background: #f0f2f5; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #007bff; margin-bottom: 20px; font-size: 18px; }
+        .row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .title { flex: 2; font-weight: bold; color: #333; }
+        .inputs { flex: 3; display: flex; gap: 5px; }
+        input { width: 70px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        input.wide { width: 150px; }
+        button { flex: 1.2; background: #28a745; color: white; border: none; padding: 6px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #218838; }
+        .result { flex: 3; background: #e9ecef; padding: 6px; border-left: 4px solid #007bff; border-radius: 0 4px 4px 0; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Bảng Công Cụ Giải Bài Tập JavaScript (1 Dòng)</h2>
+
+    <div class="row">
+        <div class="title">1. Bình phương</div>
+        <div class="inputs"><input type="number" id="inputBinhPhuong" value="5"></div>
+        <button onclick="uiBinhPhuong()">Tính</button>
+        <div class="result" id="resBinhPhuong">Kết quả: 25</div>
+    </div>
+
+    <div class="row">
+        <div class="title">2. Hình tròn (r)</div>
+        <div class="inputs"><input type="number" id="inputBanKinh" value="3" min="0"></div>
+        <button onclick="uiHinhTron()">Tính</button>
+        <div class="result" id="resHinhTron">S: 28.27 | C: 18.85</div>
+    </div>
+
+    <div class="row">
+        <div class="title">3. Giai thừa (n)</div>
+        <div class="inputs"><input type="number" id="inputGiaiThua" value="5" min="0"></div>
+        <button onclick="uiGiaiThua()">Tính</button>
+        <div class="result" id="resGiaiThua">Kết quả: 120</div>
+    </div>
+
+    <div class="row">
+        <div class="title">4. Kiểm tra ký tự số</div>
+        <div class="inputs"><input type="text" id="inputKyTuSo" maxlength="1" value="7" style="width:40px; text-align:center;"></div>
+        <button onclick="uiKyTuSo()">Kiểm tra</button>
+        <div class="result" id="resKyTuSo">Kết quả: true</div>
+    </div>
+
+    <div class="row">
+        <div class="title">5. Số nhỏ nhất</div>
+        <div class="inputs">
+            <input type="number" id="numA" value="8">
+            <input type="number" id="numB" value="2">
+            <input type="number" id="numC" value="5">
+        </div>
+        <button onclick="uiSoNhoNhat()">Tìm</button>
+        <div class="result" id="resSoNhoNhat">Kết quả: 2</div>
+    </div>
+
+    <div class="row">
+        <div class="title">6. Nguyên dương?</div>
+        <div class="inputs"><input type="number" id="inputNguyenDuong" value="10"></div>
+        <button onclick="uiNguyenDuong()">Kiểm tra</button>
+        <div class="result" id="resNguyenDuong">Kết quả: true</div>
+    </div>
+
+    <div class="row">
+        <div class="title">7. Đổi chỗ X, Y</div>
+        <div class="inputs">
+            <input type="number" id="inputX" value="10">
+            <input type="number" id="inputY" value="20">
+        </div>
+        <button onclick="uiDoiCho()">Đổi</button>
+        <div class="result" id="resDoiCho">X = 20, Y = 10</div>
+    </div>
+
+    <div class="row">
+        <div class="title">8. Đảo ngược mảng</div>
+        <div class="inputs"><input type="text" id="inputMangSo" class="wide" value="1,2,3,4"></div>
+        <button onclick="uiDaoNguoc()">Đảo</button>
+        <div class="result" id="resDaoNguoc">Mảng: [4, 3, 2, 1]</div>
+    </div>
+
+    <div class="row">
+        <div class="title">9. Tìm ký tự trong mảng</div>
+        <div class="inputs">
+            <input type="text" id="inputMangKyTu" class="wide" value="a,b,c,a,d" style="width:100px;">
+            <input type="text" id="inputKyTuTim" maxlength="1" value="a" style="width:35px; text-align:center;">
+        </div>
+        <button onclick="uiTimKyTu()">Tìm</button>
+        <div class="result" id="resTimKyTu">Kết quả: 2</div>
+    </div>
+</div>
+
+<script>
+    function tinhBinhPhuong(so) { return so * so; }
+    function tinhDienTichHinhTron(banKinh) { return Math.PI * banKinh * banKinh; }
+    function tinhChuViHinhTron(banKinh) { return 2 * Math.PI * banKinh; }
+    function tinhGiaiThua(n) {
+        if (n < 0) return undefined;
+        let kq = 1; for (let i = 1; i <= n; i++) { kq *= i; } return kq;
+    }
+    function kiemTraKyTuSo(kyTu) { return !isNaN(kyTu) && kyTu.trim() !== ''; }
+    function timSoNhoNhat(a, b, c) { return Math.min(a, b, c); }
+    function kiemTraNguyenDuong(so) { return Number.isInteger(so) && so > 0; }
+    function doiChoHaiSo(a, b) { return [b, a]; }
+    function daoNguocMang(mang) { return [...mang].reverse(); }
+    function demKyTuTrongMang(mangKyTu, kyTu) {
+        let c = 0; for (let i = 0; i < mangKyTu.length; i++) { if (mangKyTu[i].trim() === kyTu) c++; }
+        return c > 0 ? c : -1;
+    }
+
+    function uiBinhPhuong() {
+        let val = parseFloat(document.getElementById('inputBinhPhuong').value);
+        document.getElementById('resBinhPhuong').innerText = "Kết quả: " + tinhBinhPhuong(val);
+    }
+    function uiHinhTron() {
+        let r = parseFloat(document.getElementById('inputBanKinh').value);
+        if(r < 0 || isNaN(r)) { document.getElementById('resHinhTron').innerText = "Lỗi!"; return; }
+        document.getElementById('resHinhTron').innerText = `S: ${tinhDienTichHinhTron(r).toFixed(2)} | C: ${tinhChuViHinhTron(r).toFixed(2)}`;
+    }
+    function uiGiaiThua() {
+        let n = parseInt(document.getElementById('inputGiaiThua').value);
+        let res = tinhGiaiThua(n);
+        document.getElementById('resGiaiThua').innerText = "Kết quả: " + (res === undefined ? "Lỗi" : res);
+    }
+    function uiKyTuSo() {
+        let char = document.getElementById('inputKyTuSo').value;
+        document.getElementById('resKyTuSo').innerText = "Kết quả: " + kiemTraKyTuSo(char);
+    }
+    function uiSoNhoNhat() {
+        let a = parseInt(document.getElementById('numA').value);
+        let b = parseInt(document.getElementById('numB').value);
+        let c = parseInt(document.getElementById('numC').value);
+        document.getElementById('resSoNhoNhat').innerText = "Kết quả: " + timSoNhoNhat(a, b, c);
+    }
+    function uiNguyenDuong() {
+        let val = parseFloat(document.getElementById('inputNguyenDuong').value);
+        document.getElementById('resNguyenDuong').innerText = "Kết quả: " + kiemTraNguyenDuong(val);
+    }
+    function uiDoiCho() {
+        let x = parseInt(document.getElementById('inputX').value);
+        let y = parseInt(document.getElementById('inputY').value);
+        let [nX, nY] = doiChoHaiSo(x, y);
+        document.getElementById('resDoiCho').innerText = `X = ${nX}, Y = ${nY}`;
+    }
+    function uiDaoNguoc() {
+        let str = document.getElementById('inputMangSo').value;
+        let arr = str.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+        document.getElementById('resDaoNguoc').innerText = "Mảng: [" + daoNguocMang(arr).join(',') + "]";
+    }
+    function uiTimKyTu() {
+        let strArr = document.getElementById('inputMangKyTu').value;
+        let arr = strArr.split(',').map(item => item.trim());
+        let char = document.getElementById('inputKyTuTim').value.trim();
+        document.getElementById('resTimKyTu').innerText = "Kết quả: " + demKyTuTrongMang(arr, char);
+    }
+</script>
+
+</body>
+</html>
