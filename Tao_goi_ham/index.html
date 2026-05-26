@@ -8,13 +8,9 @@
 
     <script>
         function processConfirm(answer) {
-            let result = "";
-            if (answer) {
-                result = "Excellent. We'll play a nice game of chess.";
-            } else {
-                result = "Maybe later then.";
-            }
-            return result;
+            return answer 
+                ? "Excellent. We'll play a nice game of chess." 
+                : "Maybe later then.";
         }
 
         let confirmAnswer = confirm("Shall we play a game?");
